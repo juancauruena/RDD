@@ -1,6 +1,6 @@
 * name: RRD.do
 * by:Juan Urueña
-* section: regression discontinuity
+* section: Assignment 4. Regression discontinuity
 
 * Load the raw data into memory
 use https://github.com/scunning1975/causal-inference-class/raw/master/hansen_dwi, clear
@@ -39,13 +39,13 @@ esttab using examplef.rtf, replace label nogap onecell
 * Recreate Figure 2
 ssc install cmogram
 
-qui cmogram male bac1, cut(0.08) scatter line(0.08) qfitci lfit title(PanelA)
+qui cmogram male bac1 if bac1<.20, cut(0.08) scatter line(0.08) qfitci lfit title(PanelA)
 graph save panela.gph, replace 
-qui cmogram white bac1, cut(0.08) scatter line(0.08) qfitci lfit title(PanelB)
+qui cmogram white bac1 if bac1<.20, cut(0.08) scatter line(0.08) qfitci lfit title(PanelB)
 graph save panelb.gph, replace
-qui cmogram aged bac1, cut(0.08) scatter line(0.08) qfitci lfit title(PanelC)
+qui cmogram aged bac1 if bac1<.20, cut(0.08) scatter line(0.08) qfitci lfit title(PanelC)
 graph save panelc.gph, replace 
-qui cmogram acc bac1, cut(0.08) scatter line(0.08) qfitci lfit title(PanelD)
+qui cmogram acc bac1 if bac1<.20, cut(0.08) scatter line(0.08) qfitci lfit title(PanelD)
 graph save paneld.gph, replace 
 graph combine panela.gph panelb.gph panelc.gph paneld.gph
 
@@ -57,7 +57,7 @@ eststo: rdrobust recidivism bac1 male, c(0.08)
 eststo: rdrobust recidivism bac1 white, c(0.08)
 eststo: rdrobust recidivism bac1 aged, c(0.08)
 eststo: rdrobust recidivism bac1 acc, c(0.08)
-esttab
+esttab using exampleg.rtf
 
 * Figure 3 linear fit
 gen fitted=.
