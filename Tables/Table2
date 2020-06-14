@@ -1,0 +1,11 @@
+eststo: quietly reg bac1 male if bac1<.08
+eststo: quietly reg bac1 white if bac1<.08
+eststo: quietly reg bac1 aged if bac1<.08
+eststo: quietly reg bac1 acc if bac1<.08
+esttab using exampled.rtf, replace label nogap onecell
+
+eststo: quietly reg bac1 male if bac1>.08
+eststo: quietly reg bac1 white if bac1>.08
+eststo: quietly reg bac1 aged if bac1>.08
+eststo: quietly reg bac1 acc if bac1>.08
+esttab using examplef.rtf, replace label nogap onecell
